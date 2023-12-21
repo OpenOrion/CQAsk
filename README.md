@@ -25,9 +25,10 @@ This tool utilizes Language Models (LLMs) to generate Computer-Aided Design (CAD
 
 ### Backend
 1. Ensure you have Python and CadQuery are installed.
-# Cadquery dependency install seperately since for some systems conda install is necessary
-# Please view https://github.com/CadQuery/cadquery if install doesn't work for your system
-conda install -c conda-forge -c cadquery cadquery=master
+
+    Cadquery dependency install seperately since for some systems conda install is necessary. Please view https://github.com/CadQuery/cadquery if install doesn't work for your system
+
+    `conda install -c conda-forge -c cadquery cadquery=master`
 
 2. Navigate to the backend directory.
 3. Run `pip install -r requirements.txt` to install backend dependencies.
