@@ -17,7 +17,7 @@ export default function Home() {
 
   const [cadShapes, setCadShapes] = useState([])
   const [isError, setIsError] = useState(false)
-  const [cadID, setCadID] = useState<string>("2023-12-21T00:45:37.267438")
+  const [cadID, setCadID] = useState<string>()
 
   // const [UUID, setUUID] = useState<string>()
 
@@ -51,9 +51,9 @@ export default function Home() {
           style={{ width: 120 }}
           onChange={onDownload}
           options={[
+            { value: 'py', label: 'Cadquery PY' },
             { value: 'step', label: 'STEP' },
             { value: 'stl', label: 'STL' },
-
             { value: 'amf', label: 'AMF' },
             { value: '3mf', label: '3MF' },
             { value: 'vrml', label: 'VRML' },
