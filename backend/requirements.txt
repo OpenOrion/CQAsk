@@ -6,3 +6,4 @@ flask
 python-dotenv
 flask-cors
 git+https://github.com/meadiode/cq_gears.git@main
+git+https://github.com/OpenOrion/parafoil.git#egg=parafoil

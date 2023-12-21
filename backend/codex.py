@@ -60,6 +60,16 @@ def generate_cq_obj(user_msg: str):
     cq_gears.Worm(module, lead_angle, n_threads, length, pressure_angle=20.0, clearance=0.0, backlash=0.0, bore_d)
     cq_gears.SpurGear(self, module, teeth_number, width, pressure_angle=20.0, helix_angle=0.0, clearance=0.0, backlash=0.0, bore_d)
     
+    Here is a way to generate airfoils with the coordinates being fed into cq.Workplane.polyline followed by a cq.Workplane.polyline.close
+
+    For NACA airfoils use get_coords() for the following classes
+
+    You MUST: import parafoil
+
+    parafoil.CamberThicknessAirfoil(inlet_angle, outlet_angle, chord_length, angle_units="rad"|"deg")
+    parafoil.NACAAirfoil(naca_string, chord_length)
+    
+
     """
 
     # Create a dataset using GPT
