@@ -1,9 +1,6 @@
-import importlib
-import os
-from flask import Flask, request
+from flask import Flask, request, send_file
 import json
-import cadquery as cq
-import numpy as np
+from utils.download import get_donwload_string
 from codex import generate_cq_obj
 from utils.json import NumpyEncoder
 from utils.tessellate import tessellate
@@ -25,14 +22,32 @@ app.config["CORS_HEADERS"] = "Content-Type"
 @app.route("/cad", methods=["GET"])
 def cad():
     query = request.args.get("query")
-    obj = generate_cq_obj(query)
+    id, obj = generate_cq_obj(query)
     try:
         converted_obj = tessellate([obj])
-        return jsonify(json.loads(json.dumps(converted_obj, cls=NumpyEncoder)))
+        return jsonify(
+            {
+                "id": id,
+                "shapes": json.loads(json.dumps(converted_obj, cls=NumpyEncoder)),
+            }
+        )
     except Exception as e:
         print(e)
         return jsonify({"error": f"Something went wrong.{e}"})
-    
+
+
+@cross_origin()
+@app.route("/download", methods=["GET"])
+def download():
+    id = request.args.get("id")
+    file_type = request.args.get("file_type")
+    file_path = get_donwload_string(id, file_type)
+    try:
+        return send_file(file_path, as_attachment=True)
+    except Exception as e:
+        print(e)
+        return jsonify({"error": f"Something went wrong.{e}"})
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

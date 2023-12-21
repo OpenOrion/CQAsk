@@ -1,13 +1,13 @@
 "use client"
 
 
-import { Alert, Layout, Space, theme } from 'antd'
+import { Alert, Layout, Select, Space, theme } from 'antd'
 import Search from 'antd/es/input/Search'
 import { useState } from 'react'
-import { getCadShapes } from './api/cad'
+import { getCadDownload as downloadCadFile, getCadShapes as getCadObject } from './api/cad'
 import CadViewer from './components/cad-viewer'
-
 const { Content, } = Layout
+
 
 
 export default function Home() {
@@ -17,24 +17,50 @@ export default function Home() {
 
   const [cadShapes, setCadShapes] = useState([])
   const [isError, setIsError] = useState(false)
+  const [cadID, setCadID] = useState<string>("2023-12-21T00:45:37.267438")
+
   // const [UUID, setUUID] = useState<string>()
 
   const onSearch = async (value: string) => {
     try {
-      const shapes = await getCadShapes(value)
+      const cadObject = await getCadObject(value)
       // setUUID(shapes.data.uuid)
-      setCadShapes(shapes.data)
+      setCadShapes(cadObject.shapes)
+      setCadID(cadObject.id)
       setIsError(false)
     } catch {
       console.log("error")
       setIsError(true)
 
     }
+  }
 
+  const onDownload = async (file_type: "stl" | "step") => {
+    console.log(cadID, file_type)
+    if (cadID) {
+      await downloadCadFile(cadID, file_type)
+    }
   }
 
   return (
     <Layout style={{ height: "100vh" }}>
+      <Space wrap>
+        <Select
+          placeholder='Download'
+          value={"Download"}
+          style={{ width: 120 }}
+          onChange={onDownload}
+          options={[
+            { value: 'step', label: 'STEP' },
+            { value: 'stl', label: 'STL' },
+
+            { value: 'amf', label: 'AMF' },
+            { value: '3mf', label: '3MF' },
+            { value: 'vrml', label: 'VRML' },
+
+          ]}
+        />
+      </Space >
 
       <Layout>
         <Layout style={{ padding: '0 24px 24px' }}>

@@ -24,7 +24,11 @@ This tool utilizes Language Models (LLMs) to generate Computer-Aided Design (CAD
 4. Execute `yarn dev` to start the UI library.
 
 ### Backend
-1. Ensure you have Python installed.
+1. Ensure you have Python and CadQuery are installed.
+# Cadquery dependency install seperately since for some systems conda install is necessary
+# Please view https://github.com/CadQuery/cadquery if install doesn't work for your system
+conda install -c conda-forge -c cadquery cadquery=master
+
 2. Navigate to the backend directory.
 3. Run `pip install -r requirements.txt` to install backend dependencies.
 4. Add a `.env` file with `OPENAI={OPENAI KEY}`
@@ -35,9 +39,7 @@ This tool utilizes Language Models (LLMs) to generate Computer-Aided Design (CAD
 1. Access the UI via the specified URL after starting the UI library.
 2. Input your CAD requirements or specifications.
 3. Interact with the tool to generate CAD models using Language Models.
-4. All CQ generated files are in the generated directory of `backend`, you can generate STEP/STL files of your choice 
-by taking the `obj`` and using CQ functions as needed: https://cadquery.readthedocs.io/en/latest/importexport.html
-
+4. All CQ generated files are in the `backend/generated`. Can download STL/STEP/etc in UI
 ## Features
 
 - Seamless integration of Language Models for CAD generation.

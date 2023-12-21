@@ -81,13 +81,13 @@ def generate_cq_obj(user_msg: str):
         ],
     )
 
-    current_datetime = datetime.now().isoformat()
+    id = datetime.now().isoformat()
 
     # create directory "generated" if does not exist
     if not os.path.exists("generated"):
         os.makedirs("generated")
 
-    file_name = f"generated/{current_datetime}.py"
+    file_name = f"generated/{id}.py"
     with open(file_name, "w") as f:
         f.write(
             f'import cadquery as cq\n{response["choices"][0]["message"]["content"]}'
@@ -96,4 +96,4 @@ def generate_cq_obj(user_msg: str):
     spec = importlib.util.spec_from_file_location("obj_module", file_name)
     obj_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(obj_module)
-    return obj_module.obj
+    return id, obj_module.obj
