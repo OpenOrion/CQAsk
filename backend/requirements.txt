@@ -1,0 +1,8 @@
+ocp-tessellate
+cadquery
+ocp-vscode
+openai
+flask
+python-dotenv
+flask-cors
+git+https://github.com/meadiode/cq_gears.git@main
