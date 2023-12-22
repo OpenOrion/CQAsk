@@ -23,6 +23,7 @@ export default function Home() {
 
   const onSearch = async (value: string) => {
     try {
+      setIsError(false)
       const cadObject = await getCadObject(value)
       // setUUID(shapes.data.uuid)
       setCadShapes(cadObject.shapes)
